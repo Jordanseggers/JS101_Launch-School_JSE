@@ -35,7 +35,9 @@ while (true) {
   prompt("Please enter the loan amount ($)");
   let loanNoDollarS = (readline.question().replace("$", ""));
 
-  let loanAmt = parseFloat(loanNoDollarS.replace(",", ""));  //node doesn't support .replaceAll...
+  let loanAmt = parseFloat(loanNoDollarS.replace(",", ""));
+  //node doesn't support .replaceAll...
+  //This is now a small loan calculator by design :p
 
   //Ask the user for APR
   prompt("Please enter the Annual Percentage Rate (%)");
