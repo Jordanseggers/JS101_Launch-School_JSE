@@ -4,13 +4,6 @@ function prompt(message) {
   console.log(`${message}`);
 }
 
-let aPR = "tbd";
-
-function getAPR() {
-  prompt("Please enter the Annual Percentage Rate (%)");
-  aPR = readline.question();
-  }
-
 function isInvalidNumber(number) {
   return number.trim() === '' ||
          Number(number) < 0   ||
@@ -18,25 +11,22 @@ function isInvalidNumber(number) {
 }
 
 //logic check for APR input   can this be made simpler?
-function aPRIsLow(aPR) {
-  prompt("Woah you're getting a fantastic deal!");
-  prompt ("Are you sure that's an APR rather than a monthly rate?");
-  if (tryAgain()) {
-    getAPR();
-  }
-}
+function validate(aPR) {
+  while (aPR <= 1) {
+    prompt("Woah you're getting a fantastic deal!");
+    prompt ("Are you sure that's an APR rather than a monthly rate?");
+    let secondTry = readline.question();
 
-function tryAgain() {
-  let secondTry = readline.question();
+    while (secondTry[0] !== 'n' && secondTry[0] !== 'y') {
+      prompt('Please enter "y" or "n".');
+      secondTry = readline.question().toLowerCase();
+    }
 
-  while (secondTry[0] !== 'n' && secondTry[0] !== 'y') {
-    prompt('Please enter "y" or "n".');
-    secondTry = readline.question().toLowerCase();
-  }
-  if (secondTry[0] === 'n') {
-    return true;
-  }else{
-    return false;
+    if (secondTry[0] === 'n') {
+      return ('try again');
+    }else{
+      break;
+    }
   }
 }
 
@@ -59,16 +49,18 @@ while (true) {
   }
 
   //Ask the user for APR
-  getAPR();
-
-  if(isInvalidNumber(aPR)) {
-    prompt("Must enter a positive number");
-    getAPR();
-  }
+  prompt("Please enter the Annual Percentage Rate (%)");
+  let aPR = readline.question();
   
-  //double check aPR entry
-  if(aPR < 1) {
-    aPRIsLow(aPR);
+  while(isInvalidNumber(aPR)) {
+    prompt("Must enter a positive number");
+    aPR = readline.question();
+  }
+
+  //double check APR entry
+  if (validate(aPR) === 'try again') {
+    prompt("Please enter the Annual Percentage Rate (%)");
+    aPR = parseFloat(readline.question());
   }
 
   let mPR = annToMon(aPR);
