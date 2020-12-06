@@ -9,7 +9,7 @@ let aPR = "tbd";
 function getAPR() {
   prompt("Please enter the Annual Percentage Rate (%)");
   aPR = readline.question();
-  }
+}
 
 function isInvalidNumber(number) {
   return number.trim() === '' ||
@@ -35,7 +35,7 @@ function tryAgain() {
   }
   if (secondTry[0] === 'n') {
     return true;
-  }else{
+  } else {
     return false;
   }
 }
@@ -47,13 +47,13 @@ function annToMon(aPR) {
 
 while (true) {
   prompt('---------------------------------');
-// If true call step 1 again if false call step 2
+  // If true call step 1 again if false call step 2
   //Ask the user for Loan amount
   prompt("Please enter the loan amount ($)");
-  
+
   let OnlyNumPortionOfLoan = (readline.question().replace("$", "")).replace(",", "");
-  
-  while(isInvalidNumber(OnlyNumPortionOfLoan)) {
+
+  while (isInvalidNumber(OnlyNumPortionOfLoan)) {
     prompt("Please enter the loan amount ($)");
     OnlyNumPortionOfLoan = (readline.question().replace("$", "")).replace(",", "");
   }
@@ -61,13 +61,13 @@ while (true) {
   //Ask the user for APR
   getAPR();
 
-  if(isInvalidNumber(aPR)) {
+  if (isInvalidNumber(aPR)) {
     prompt("Must enter a positive number");
     getAPR();
   }
-  
+
   //double check aPR entry
-  if(aPR < 1) {
+  if (aPR < 1) {
     aPRIsLow(aPR);
   }
 
@@ -76,8 +76,8 @@ while (true) {
   //Ask the user for loan duration
   prompt("Please enter the loan duration in years");
   let loanTimeYear = readline.question();
-  
-  while(isInvalidNumber(loanTimeYear)) {
+
+  while (isInvalidNumber(loanTimeYear)) {
     prompt("Must enter a positive number");
     loanTimeYear = readline.question();
   }
