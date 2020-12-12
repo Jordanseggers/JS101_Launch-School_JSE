@@ -1,6 +1,8 @@
 const readline = require('readline-sync');
 const VALID_CHOICES = ['rock', 'paper', 'scissors'];
 const VALID_CHOICE_ABREVIATIONS = ['r', 'p', 's'];
+const WINNING_SCORE = 3;
+let score = {"you": 0, "the computer": 0};
 
 function prompt(message) {
   console.log(`=> ${message}`);
@@ -35,8 +37,10 @@ function getWinner(choice, computerChoice) {
 }
 
 function informUserOfRound(round) {
-  if (round === 2) {
-    prompt('Go for another round! Best 3/5 wins the grand champion title!');
+  if (round === 1) {
+    prompt('Best 3/5 wins the grand champion title!');
+  } else if (round === 2) {
+    prompt('Go for another round!');
   } else if (round === 3) {
     prompt('Keep going!');
   } else if (round === 4) {
@@ -44,23 +48,18 @@ function informUserOfRound(round) {
   }
 }
 
-function tallyTheWins(winArray) {
-  let user = 0;
-  let computer = 0;
-  winArray.forEach(winner => {
-    if (winner === 'you') {
-      user += 1;
-    } else if (winner === 'the computer') {
-      computer += 1;
-    }
-  });
-  return [user, computer];
+function tallyTheWins(winnerOfCurrentRound) {
+  if (winnerOfCurrentRound === 'you') {
+    score["you"] += 1;
+  } else if (winnerOfCurrentRound === "the computer") {
+    score["the computer"] += 1;
+  }
 }
 
-function checkForGrandChampion(scoreArray) {
-  if (scoreArray[0] === 3) {
+function checkForGrandChampion() {
+  if (score["you"] === WINNING_SCORE) {
     return ('you');
-  } else if (scoreArray[1] === 3) {
+  } else if (score["the computer"] === WINNING_SCORE) {
     return ('the computer');
   } else {
     return ('nobody');
@@ -68,7 +67,6 @@ function checkForGrandChampion(scoreArray) {
 }
 
 let thisCurrentRound = 1;
-let winnerList = [];
 
 
 while (true) {
@@ -93,20 +91,19 @@ while (true) {
   let winnerOfCurrentRound = getWinner(choice, computerChoice);
   prompt(`and the winner is... ${winnerOfCurrentRound}`);
 
+  tallyTheWins(winnerOfCurrentRound);
+
   if (winnerOfCurrentRound !== 'nobody') {
     thisCurrentRound += 1;
   }
 
-  winnerList.push(winnerOfCurrentRound);
-  let currentScore = tallyTheWins(winnerList);
-
-  let grandChampion = checkForGrandChampion(currentScore);
+  let grandChampion = checkForGrandChampion();
   if (grandChampion !== 'nobody') {
     prompt(`The grand champion is ${grandChampion}!!`);
     break;
   }
 
-  prompt(`You have ${currentScore[0]} wins. The computer has ${currentScore[1]} wins.`);
+  prompt(`You have ${score["you"]} wins. The computer has ${score["the computer"]} wins.`);
 
   informUserOfRound(thisCurrentRound);
 
