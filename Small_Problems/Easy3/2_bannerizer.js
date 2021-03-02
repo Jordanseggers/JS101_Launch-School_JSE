@@ -1,17 +1,10 @@
-function logInBox(text) {
-  let borderFill = '';
-  let fill = '';
-  
-  for (let i = 0; i > text.length; i++) {
-    borderFill.concat('-');
-    fill.concat(' ');
-  }
-  
-  console.log(`+-${borderFill}-+`);
-  console.log(`| ${fill} |`);
-  console.log(`| ${text} |`);
-  console.log(`| ${fill} |`);
-  console.log(`+-${borderFill}-+`);
+function logInBox (textLine) {
+  let textLength = textLine.length;
+  console.log(`+-${'-'.repeat(textLength)}-+`);
+  console.log(`| ${' '.repeat(textLength)} |`);
+  console.log(`| ${textLine} |`);
+  console.log(`| ${' '.repeat(textLength)} |`);
+  console.log(`+-${'-'.repeat(textLength)}-+`);
 }
 
-logInBox('heeeeyyyyooo');
+logInBox('To boldly go where no one has gone before.');

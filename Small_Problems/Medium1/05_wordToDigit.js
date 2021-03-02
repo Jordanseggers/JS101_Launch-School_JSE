@@ -11,15 +11,9 @@ function wordToDigit (sentence) {
     nine : '9',
   };
   let words = sentence.split(' ');
-  
-  words.forEach(word => {
-    for (let num in numObj) {
-      if (word.includes(num)) {
-        word.replace(num, numObj[num]);
-      }
-    }
-  });
-  return words.join(' ');
+  for (let i = 0; i < words.length; i++) {
+    if words[i].includes();
+  }
 }
 
 console.log(wordToDigit('Please call me at five five five one two three four. Thanks.'));

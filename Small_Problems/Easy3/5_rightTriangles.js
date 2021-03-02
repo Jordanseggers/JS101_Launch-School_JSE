@@ -1,11 +1,9 @@
-function triangle (lengthNumber) {
-  
-  for (let i = 1; i <= lengthNumber; i++) {
-    let star = '*'
-    console.log(star.repeat(i));
+function triangles (triangleLength) {
+  for (let i = 1; i <= triangleLength; i++) {
+    let numOfSpaces = triangleLength - i;
+    console.log(' '.repeat(numOfSpaces).concat('*'.repeat(i)));
   }
 }
 
-triangle(2);
-triangle(5);
-triangle(7);
+triangles(5);
+triangles(9);

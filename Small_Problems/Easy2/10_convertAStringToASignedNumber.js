@@ -1,34 +1,25 @@
-function stringToSignedInteger (theString) {
-  let DIGITS = {
-    0: 0,
-    1: 1,
-    2: 2,
-    3: 3,
-    4: 4,
-    5: 5,
-    6: 6,
-    7: 7,
-    8: 8,
-    9: 9,
-  };
+let theKey = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']; 
+
+function stringToInteger(stringOfNums) {
+  let place = 1;
+  let totalNum = 0;
   
-  if (theString[0] === '+' || theString[0] === '-') {
-    let arrayOfStrings = theString.split("");
-    let sign = arrayOfStrings[0];
-    let arrayOfDigits = arrayOfStrings.slice(1).map(char => DIGITS[char]);
-    let value = 0;
-    arrayOfDigits.forEach(digit => (value = (10 * value) + digit));
-    if (sign === '-'){
-      value = 0 - value;
-      return value;
-    } else {
-      return value;
-    }
+  let stringArr = stringOfNums.toString().split('');
+  for (let i = stringArr.length - 1; i >= 0; i --){
+    let indexValue = theKey.findIndex(num => num === stringArr[i]);
+    totalNum += (place * indexValue);
+    place *= 10;
+  }
+  return totalNum;
+}
+
+function stringToSignedInteger (stringNums) {
+  if (stringNums[0] === '+') {
+    return stringToInteger(stringNums.slice(1));
+  } else if (stringNums[0] === '-') {
+    return 0 - stringToInteger(stringNums.slice(1));
   } else {
-    let arrayOfDigits = theString.split("").map(char => DIGITS[char]);
-    let value = 0;
-    arrayOfDigits.forEach(digit => (value = (10 * value) + digit));
-    return value;
+    return stringToInteger(stringNums);
   }
 }
 
